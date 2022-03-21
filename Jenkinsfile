@@ -19,8 +19,22 @@ pipeline {
         }
         stage('Coverage') {
             steps {
-                dir('python-aplicacion-ejemplo') {
+                dir('python-app-example') {
                     sh 'python -m coverage report -m --fail-under=90'
+                }
+            }
+        }
+         stage('Package') {
+            steps {
+                dir('python-app-example') {
+                    sh 'python -m build'
+                }
+            }
+        }
+         stage('publish') {
+            steps {
+                dir('python-app-example') {
+                    sh 'python -m twine upload dist/* --config-file ~/.pypirc --skip-existing'
                 }
             }
         }
