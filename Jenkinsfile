@@ -3,7 +3,7 @@ pipeline {
         label('python')
     }
     environment{
-        PYPI_CREDENTIALS = credentilas('pypi-credentials')
+        PYPI_CREDENTIALS = credentials('pypi-credentials')
     }
     stages {
         stage('Build') {
